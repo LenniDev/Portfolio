@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+html {
+  scroll-behavior: smooth; 
+}
+
+body {
+  background-color: #141414;
+  color: #FFFFFF;
+  padding: 0;
+  margin: 0; 
+}
+
+h1, h2 {
+  font-family: "Roboto Mono", monospace; 
+}
+
+h1 {
+  font-size: 100pt;
+  margin: 0; 
+}
+
+p {
+  font-family: "Roboto", sans-serif; 
+}
+#landing-info {
+    font-size: 30pt; 
+}
+
+#landing-section {
+  max-height: 100vh;
+  height: 50vh;
+  max-width: 900px;
+  padding-top: 10vh;
+  padding-right: 40vw;
+  margin-left: calc(60vw - 600px); }
+#landing-section #dart-svg {
+  z-index: -10;
+  position: absolute;
+  fill: #202020;
+  right: -20px;
+  top: 10px;
+  height: 200px; }
+#landing-section #java-svg {
+  z-index: -10;
+  position: absolute;
+  fill: #202020;
+  height: 130px;
+  top: 12vh;
+  left: 30vw; }
+#landing-section #js-svg {
+  z-index: -10;
+  position: absolute;
+  fill: #202020;
+  top: 30vh;
+  left: -60px;
+  height: 300px; }
+#landing-section #python-svg {
+  z-index: -10;
+  position: absolute;
+  fill: #202020;
+  height: 50vh;
+  right: -10px;
+  top: 150px; }
+#landing-section #landing-info {
+  max-width: 700px; }
+#landing-section #my-projects-button {
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  color: #FFFFFF;
+  padding: 10px 50px;
+  border: 1px #FFFFFF solid;
+  border-radius: 50px;
+  transition: 0.3s; }
+  #landing-section #my-projects-button svg {
+  fill: #FFFFFF;
+  display: inline-block;
+  height: 20px;
+  transform: translate(15px, 5px); }
+#landing-section #my-projects-button:hover {
+   color: #141414;
+   background: #FFFFFF;
+}
+
+#smiley-drawing-pad {
+  height: 200px;
+  width: 200px;
+  background-color: grey;
+}
+.project {
+  margin-left: 50vw;
+  transform: translateX(-50%);
+  max-width: 900px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: "media title" "media description";
+  grid-column-gap: 50px;
+  margin-bottom: 50px;
+}
+.project:nth-child(2n) {
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas: "title media" "description media";
+}
+.project div {
+  grid-area: media;
+  max-height: 300px;
+  }
+.project div * {
+  max-height: 300px;
+  }
+.project h2 {
+  grid-area: title;
+  }
+.project p {
+  grid-area: description;
+  }
+#footer {
+  width: 100vw;
+  height: 200px;
+  background-color: #202020;
+  font-family: "Roboto Mono", monospace;
+  font-size: 30pt;
+  display: inline-grid;
+  justify-items: center;
+  align-items: center;
+}

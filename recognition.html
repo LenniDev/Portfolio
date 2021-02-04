@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.js"></script>
+</head>
+<body>
+<h3>Zeichne ein fröhlichen oder traurigen Smiley und Klicke auf "Identifizieren Lassen" um es von einer Künstlichen Intelegenz Identifizieren zu lassen</h3>
+<div class="container">
+    <div id="drawing-pad" style="grid-area: drawing-pad;"></div>
+    <div class="delete" style="background: red;" onclick="clear_picture()">Bild Löschen</div>
+    <div class="identify" style="background: blue;" onclick="identify()">Identifizieren Lassen</div>
+</div>
+<div class="modal" id="show">
+    <div class="report-post">
+        <label>Name</label><br>
+        <div class="button-container">
+            <div class="abort-button" onclick="$('#show').hide();">Schließen</div>
+        </div>
+    </div>
+    <div class="container">
+        
+    </div>
+</div>
+<style>
+    .container{
+        display: grid;
+        grid-template-areas:
+    "drawing-pad drawing-pad",
+    "clear identify";
+    grid-template-rows: 250px 50px;
+    grid-template-columns: 125px 125px; 
+    }
+    .delte{
+        grid-area: clear;
+    }
+    .identify{
+        grid-area: identify;
+    }
+</style>
+<script>
+    var picture = [];
+    api_url = "http://127.0.0.1:5000/";
+    function setup(){
+        let canvas = createCanvas(250, 250);
+        canvas.parent("drawing-pad")
+        clear_picture();
+    }
+    function draw(){
+        if(mouseIsPressed){
+            try{
+                picture[Math.round((mouseX-5)/10)][Math.round((mouseY-5)/10)] = 0
+            }catch{}
+        }
+        for(var x = 0; x< 25; x++){
+            for(var y = 0; y< 25; y++){
+                fill(picture[x][y])
+                rect(10*x, 10*y, 10*x+10, 10*y+10);
+            }
+        }
+    }
+
+    function clear_picture(){
+        picture = [];
+        for(var x = 0; x< 25; x++){
+            var line = [];
+            for(var y = 0; y< 25; y++){
+                line.push(255);
+            }
+            picture.push(line);
+        }
+    }
+
+    async function identify(){
+        let response = await fetch(api_url + 'predict', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"picture":picture}),
+        });
+        data = await response.json()
+        $("#show").show()
+        
+        $("#show .report-post label").html(JSON.stringify(data));
+    }
+</script>
+</body>
+</html>
